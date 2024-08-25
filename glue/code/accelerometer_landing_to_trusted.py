@@ -21,7 +21,9 @@ AWSGlueDataCatalog_node1724478852994 = glueContext.create_dynamic_frame.from_cat
 # Script generated for node Join
 Join_node1724478930722 = Join.apply(frame1=AWSGlueDataCatalog_node1724478852994, frame2=AWSGlueDataCatalog_node1724478885657, keys1=["email"], keys2=["user"], transformation_ctx="Join_node1724478930722")
 
-# Script generated for node Amazon S3
-AmazonS3_node1724479036315 = glueContext.write_dynamic_frame.from_options(frame=Join_node1724478930722, connection_type="s3", format="json", connection_options={"path": "s3://udacity-data-euhoro-lakehouse/accelerometer/trusted/", "partitionKeys": []}, transformation_ctx="AmazonS3_node1724479036315")
+# #Script generated for node Amazon S3
+#AmazonS3_node1724479036315 = glueContext.write_dynamic_frame.from_options(frame=Join_node1724478930722, connection_type="s3", format="json", connection_options={"path": "s3://udacity-data-euhoro-lakehouse/accelerometer/trusted/", "partitionKeys": []}, transformation_ctx="AmazonS3_node1724479036315")
+# Script generated for node AWS Glue Data Catalog
+AmazonS3_node1724479036315 = glueContext.write_dynamic_frame.from_catalog(frame=Join_node1724478930722, database="device", table_name="accelerometer_trusted", additional_options={"enableUpdateCatalog": True, "updateBehavior": "UPDATE_IN_DATABASE"}, transformation_ctx="AmazonS3_node1724479036315")
 
 job.commit()

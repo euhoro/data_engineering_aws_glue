@@ -27,7 +27,9 @@ select * from myDataSource where shareWithResearchAsOfDate >0
 '''
 SQLQuery_node1724250013039 = sparkSqlQuery(glueContext, query = SqlQuery0, mapping = {"myDataSource":AmazonS3_node1724249751156}, transformation_ctx = "SQLQuery_node1724250013039")
 
-# Script generated for node Amazon S3
-AmazonS3_node1724250060746 = glueContext.write_dynamic_frame.from_options(frame=SQLQuery_node1724250013039, connection_type="s3", format="json", connection_options={"path": "s3://udacity-data-euhoro-lakehouse/customer/trusted/", "partitionKeys": []}, transformation_ctx="AmazonS3_node1724250060746")
+## Script generated for node Amazon S3
+#AmazonS3_node1724250060746 = glueContext.write_dynamic_frame.from_options(frame=SQLQuery_node1724250013039, connection_type="s3", format="json", connection_options={"path": "s3://udacity-data-euhoro-lakehouse/customer/trusted/", "partitionKeys": []}, transformation_ctx="AmazonS3_node1724250060746")
+# Script generated for node AWS Glue Data Catalog
+AmazonS3_node1724250060746 = glueContext.write_dynamic_frame.from_catalog(frame=SQLQuery_node1724250013039, database="device", table_name="customer_trusted", additional_options={"enableUpdateCatalog": True, "updateBehavior": "UPDATE_IN_DATABASE"}, transformation_ctx="AmazonS3_node1724250060746")
 
 job.commit()

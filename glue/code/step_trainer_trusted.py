@@ -31,7 +31,7 @@ from myStepTrainer inner join myCustomer on myStepTrainer.serialnumber= myCustom
 '''
 SQLQuery_node1724519787756 = sparkSqlQuery(glueContext, query = SqlQuery0, mapping = {"myCustomer":AmazonS3_node1724519760657, "myStepTrainer":AmazonS3_node1724519824890}, transformation_ctx = "SQLQuery_node1724519787756")
 
-# Script generated for node Amazon S3
-AmazonS3_node1724520703044 = glueContext.write_dynamic_frame.from_options(frame=SQLQuery_node1724519787756, connection_type="s3", format="json", connection_options={"path": "s3://udacity-data-euhoro-lakehouse/step_trainer/trusted5/", "partitionKeys": []}, transformation_ctx="AmazonS3_node1724520703044")
+# Script generated for node AWS Glue Data Catalog
+AWSGlueDataCatalog_node1724606281825 = glueContext.write_dynamic_frame.from_catalog(frame=SQLQuery_node1724519787756, database="device", table_name="step_trainer_trusted", additional_options={"enableUpdateCatalog": True, "updateBehavior": "UPDATE_IN_DATABASE"}, transformation_ctx="AWSGlueDataCatalog_node1724606281825")
 
 job.commit()
